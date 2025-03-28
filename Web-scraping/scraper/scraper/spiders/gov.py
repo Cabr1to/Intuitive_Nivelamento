@@ -3,7 +3,6 @@ import zipfile
 from scrapy import Request
 import scrapy
 
-
 class GovSpider(scrapy.Spider):
     name = "gov"
     allowed_domains = ["www.gov.br"]
@@ -17,6 +16,7 @@ class GovSpider(scrapy.Spider):
         if os.path.exists(self.zip_filename):
             os.remove(self.zip_filename)
 
+    # Extrair os dados
     def parse(self, response):
         for href in response.css('li .internal-link:nth-child(1)::attr(href)').extract():
             if href.lower().endswith('.pdf'):
@@ -24,7 +24,7 @@ class GovSpider(scrapy.Spider):
                     url=response.urljoin(href),
                     callback=self.add_to_zip
                 )
-
+    # Compactando os arquivos
     def add_to_zip(self, response):
         filename = response.url.split('/')[-1]
 
