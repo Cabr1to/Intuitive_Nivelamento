@@ -23,4 +23,6 @@ SET
     VL_SALDO_FINAL = REPLACE(REPLACE(@VL_SALDO_FINAL, '.', ''), ',', '.');
 
 
-SELECT * FROM tri_3_2024
+SELECT * FROM tri_3_2024;
+
+	
